@@ -20,10 +20,10 @@ public class KelasDetailEntity {
     @Column(name = "id")
     private String id;
 
-    @Column(name = "kelas_id")
+    @Column(name = "kelas_id", insertable = false, updatable = false)
     private String kelasId;
 
-    @Column(name = "mahasiswa_id")
+    @Column(name = "mahasiswa_id", insertable = false, updatable = false)
     private String mahasiswaId;
 
     @Column(name = "status")
@@ -40,5 +40,4 @@ public class KelasDetailEntity {
     public KelasDetailEntity() {
     }
 
-    
 }
