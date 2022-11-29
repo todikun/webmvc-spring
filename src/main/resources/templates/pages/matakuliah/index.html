@@ -1,0 +1,57 @@
+<!-- Content start -->
+<div class="container-fluid p-0" xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main}"
+     layout:fragment="content">
+
+    <h1 class="h3 mb-3">Matakuliah</h1>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <a th:href="@{~/matakuliah/add}"
+                       class="btn btn-primary mb-3">
+                        <i class="align-middle" data-feather="plus"></i>
+                    </a>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <td>Kode</td>
+                            <td>Nama</td>
+                            <td>Sks</td>
+                            <td>Action</td>
+                        </tr>
+                        </thead>
+
+                        <tbody class="table-group-divider">
+                        <tr th:each="data : ${dataList}">
+                            <td th:text="${data.code}"></td>
+                            <td th:text="${data.name}"></td>
+                            <td th:text="${data.sks}"></td>
+                            <td>
+                                <a class="btn btn-xs btn-secondary" th:href="@{~/matakuliah/detail/{id}(id=${data.id})}">
+                                    <i class="align-middle" data-feather="eye"></i>
+                                </a>
+
+                                <a class="btn btn-xs btn-warning" th:href="@{~/matakuliah/edit/{id}(id=${data.id})}">
+                                    <i class="align-middle" data-feather="edit"></i>
+                                </a>
+
+                                <form th:action="@{~/matakuliah/delete}" method="post"
+                                      class="d-inline"
+                                      onsubmit="return confirm('Yakin hapus data ?')">
+                                    <input type="hidden" name="id" th:value="${data.id}">
+                                    <button type="submit" class="btn btn-xs btn-danger">
+                                        <i class="align-middle" data-feather="trash-2"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Content end -->

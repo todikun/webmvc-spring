@@ -1,0 +1,29 @@
+<!-- Content start -->
+<div class="container-fluid p-0" xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main}"
+     layout:fragment="content">
+
+    <h1 class="h3 mb-3">Add Fakultas</h1>
+
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="card-body">
+                    <form th:action="@{~/fakultas/save}" method="post">
+                        <h5 class="card-title mb-3">Kode</h5>
+                        <input type="text" class="form-control mb-3" name="code" id="code">
+
+                        <h5 class="card-title mb-3">Nama</h5>
+                        <input type="text" class="form-control mb-3" name="name" id="name">
+
+                        <h5 class="card-title mb-3">Alamat</h5>
+                        <textarea class="form-control mb-3" rows="2" placeholder="Alamat" name="alamat" id="alamat"></textarea>
+
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Content end -->

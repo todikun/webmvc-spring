@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="~{fragments/header :: header}">
+</head>
+
+<body>
+<div class="wrapper">
+    <nav th:replace="~{fragments/sidebar :: sidebar}">
+    </nav>
+
+    <div class="main">
+        <nav th:replace="~{fragments/navbar :: navbar}">
+            <a class="sidebar-toggle js-sidebar-toggle">
+                <i class="hamburger align-self-center"></i>
+            </a>
+        </nav>
+
+        <main class="content">
+
+            <div class="my-3" th:if="${success}">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong th:text="${success}"></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+
+            <div class="container-fluid p-0" layout:fragment="content"></div>
+        </main>
+
+        <!-- Modal start -->
+        <div class="modal fade" id="modal-form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modal-label"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal end -->
+
+
+        <footer th:replace="~{fragments/footer :: footer}">
+        </footer>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script th:src="@{~/dist/js/app.js}"></script>
+<script th:src="@{~/dist/js/bootstrap.bundle.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+
+<script layout:fragment="client-script"></script>
+
+</body>
+
+</html>

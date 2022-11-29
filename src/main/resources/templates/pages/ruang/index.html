@@ -1,0 +1,124 @@
+<body xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main}">
+
+<!-- Content start -->
+<div class="container-fluid p-0" layout:fragment="content">
+    <h1 class="h3 mb-3">Ruang</h1>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <a th:href="@{~/ruang/add}"
+                       class="btn btn-primary mb-3 btn-add">
+                        <i class="align-middle" data-feather="plus"></i>
+                    </a>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <td>Kode</td>
+                            <td>Name</td>
+                            <td>Lantaike</td>
+                            <td>Gedung</td>
+                            <td>Action</td>
+                        </tr>
+                        </thead>
+
+                        <tbody class="table-group-divider">
+                        <tr th:each="data : ${dataList}">
+                            <td th:text="${data.code}"></td>
+                            <td th:text="${data.name}"></td>
+                            <td th:text="${data.lantaiKe}"></td>
+                            <td th:text="${data.Gedung.name}"></td>
+                            <td>
+                                <a class="btn btn-xs btn-secondary btn-detail" th:href="@{~/ruang/detail/{id}(id=${data.id})}">
+                                    <i class="align-middle" data-feather="eye"></i>
+                                </a>
+
+                                <a class="btn btn-xs btn-warning btn-edit" th:href="@{~/ruang/edit/{id}(id=${data.id})}">
+                                    <i class="align-middle" data-feather="edit"></i>
+                                </a>
+
+                                <form th:action="@{~/ruang/delete}" method="post"
+                                      class="d-inline"
+                                      onsubmit="return confirm('Yakin hapus data ?')">
+                                    <input type="hidden" name="id" th:value="${data.id}">
+                                    <button type="submit" class="btn btn-xs btn-danger">
+                                        <i class="align-middle" data-feather="trash-2"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Content end -->
+
+<script layout:fragment="client-script">
+
+        // event button edit
+        $('.btn-edit').on('click', function(e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+
+            $.ajax({
+                url: url,
+                dataType: 'HTML',
+                method: 'GET',
+                success: function(result) {
+                    $('#modal-form').find('#modal-label').html("Edit Mahasiswa");
+                    $('#modal-form').find('.modal-body').html(result);
+                    $('#modal-form').modal('show');
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+        });
+
+        // event button add
+        $('.btn-add').on('click', function(e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+
+            $.ajax({
+                url: url,
+                dataType: 'HTML',
+                method: 'GET',
+                success: function(result) {
+                    $('#modal-form').find('#modal-label').html("Add Mahasiswa");
+                    $('#modal-form').find('.modal-body').html(result);
+                    $('#modal-form').modal('show');
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+        });
+
+        // event button detail
+        $('.btn-detail').on('click', function(e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+
+            $.ajax({
+                url: url,
+                dataType: 'HTML',
+                method: 'GET',
+                success: function(result) {
+                    $('#modal-form').find('#modal-label').html("Detail Mahasiswa");
+                    $('#modal-form').find('.modal-body').html(result);
+                    $('#modal-form').modal('show');
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+        });
+
+</script>
+
+</body>

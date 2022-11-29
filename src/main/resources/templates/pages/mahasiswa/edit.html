@@ -1,0 +1,61 @@
+<!-- Content start -->
+<div class="container-fluid p-0" xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main}"
+     layout:fragment="content">
+
+    <h1 class="h3 mb-3">Edit Mahasiswa</h1>
+
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="card-body">
+                    <form th:action="@{~/mahasiswa/update}" method="post">
+                        <input type="hidden" name="id" id="id" th:value="${data.id}">
+                        <h5 class="card-title mb-3">Nama</h5>
+                        <input type="text" class="form-control mb-3" name="name" id="name" th:value="${data.name}">
+
+                        <h5 class="card-title mb-3">Jenis Kelamin</h5>
+                        <select class="form-select mb-3" name="jk">
+                            <option disabled></option>
+                            <option th:value="Pria" th:selected="${data.jk} == Pria">Pria</option>
+                            <option th:value="Wanita" th:selected="${data.jk} == Wanita">Wanita</option>
+                        </select>
+
+                        <h5 class="card-title mb-3">Alamat</h5>
+                        <textarea class="form-control mb-3" rows="2" placeholder="Alamat" name="alamat" id="alamat"
+                                  th:text="${data.alamat}"></textarea>
+
+                        <h5 class="card-title mb-3">Tempat Lahir</h5>
+                        <input type="text" class="form-control mb-3" name="tmpLahir" id="tmpLahir"
+                               th:value="${data.tmpLahir}">
+
+                        <h5 class="card-title mb-3">Tanggal Lahir</h5>
+                        <input type="date" class="form-control mb-3" name="tglLahir" id="tglLahir"
+                               th:value="${data.tglLahir}">
+
+                        <h5 class="card-title mb-3">Agama</h5>
+                        <select class="form-select mb-3" name="agama">
+                            <option disabled></option>
+                            <option th:value="Islam" th:selected="${data.agama} == Islam">Islam</option>
+                            <option th:value="Kristen" th:selected="${data.agama} == Kristen">Kristen</option>
+                            <option th:value="Buddha" th:selected="${data.agama} == Buddha">Buddha</option>
+                            <option th:value="Konghucu" th:selected="${data.agama} == Konghucu">Konghucu</option>
+                        </select>
+
+                        <h5 class="card-title mb-3">Jurusan</h5>
+                        <select class="form-select mb-3" name="jurusan.id">
+                            <option value=""></option>
+                            <option th:each="jurusan : ${jurusanList}" th:value="${jurusan.id}"
+                                    th:text="${jurusan.name}" th:selected="${jurusan.id} == ${data.jurusanId}"></option>
+                        </select>
+
+                        <button type="submit" class="btn btn-success">Update</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Content end -->
+

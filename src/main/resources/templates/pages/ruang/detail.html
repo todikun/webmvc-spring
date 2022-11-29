@@ -1,0 +1,17 @@
+<!-- Content start -->
+
+<form action="#" xmlns:th="http://www.thymeleaf.org">
+    <h5 class="card-title mb-3">Kode</h5>
+    <input readonly="readonly" type="text" class="form-control mb-3" name="code" id="code" th:value="${data.code}">
+
+    <h5 class="card-title mb-3">Nama</h5>
+    <input readonly="readonly" type="text" class="form-control mb-3" name="name" id="name" th:value="${data.name}">
+
+    <h5 class="card-title mb-3">Lantai ke</h5>
+    <input readonly="readonly" type="number" class="form-control mb-3" name="lantaiKe" id="lantaiKe"
+           th:value="${data.lantaiKe}">
+
+    <h5 class="card-title mb-3">Gedung</h5>
+    <input readonly="readonly" type="text" class="form-control mb-3" name="gedung" id="gedung"
+           th:value="${data.gedung.name}">
+</form>

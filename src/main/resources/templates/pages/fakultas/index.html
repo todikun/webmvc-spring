@@ -1,0 +1,117 @@
+<body xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main}">
+
+<!-- Content start -->
+<div class="container-fluid p-0" layout:fragment="content">
+
+    <h1 class="h3 mb-3">Fakultas</h1>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <a th:href="@{~/fakultas/add}"
+                       class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modal-action">
+                        <i class="align-middle" data-feather="plus"></i>
+                    </a>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <td>Kode</td>
+                            <td>Nama Fakultas</td>
+                            <td>Alamat</td>
+                            <td>Action</td>
+                        </tr>
+                        </thead>
+
+                        <tbody class="table-group-divider">
+                        <tr th:each="data : ${dataList}">
+                            <td th:text="${data.code}"></td>
+                            <td th:text="${data.name}"></td>
+                            <td th:text="${data.alamat}"></td>
+                            <td>
+                                <a class="btn btn-xs btn-secondary" th:href="@{~/fakultas/detail/{id}(id=${data.id})}">
+                                    <i class="align-middle" data-feather="eye"></i>
+                                </a>
+
+                                <a class="btn btn-xs btn-warning" th:href="@{~/fakultas/edit/{id}(id=${data.id})}">
+                                    <i class="align-middle" data-feather="edit"></i>
+                                </a>
+
+                                <form th:action="@{~/fakultas/delete}" method="post"
+                                      class="d-inline"
+                                      onsubmit="return confirm('Yakin hapus data ?')">
+                                    <input type="hidden" name="id" th:value="${data.id}">
+                                    <button type="submit" class="btn btn-xs btn-danger">
+                                        <i class="align-middle" data-feather="trash-2"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal add start -->
+    <div class="modal fade" id="modal-action" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalLabel">Add Mahasiswa</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form th:action="@{~/fakultas/save}" method="post" id="form-action">
+                        <h5 class="card-title mb-3">Kode</h5>
+                        <input type="text" class="form-control mb-3" name="code" id="code">
+
+                        <h5 class="card-title mb-3">Nama</h5>
+                        <input type="text" class="form-control mb-3" name="name" id="name">
+
+                        <h5 class="card-title mb-3">Alamat</h5>
+                        <textarea class="form-control mb-3" rows="2" placeholder="Alamat" name="alamat" id="alamat"></textarea>
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" id="btn-action" class="btn btn-success">Save</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal add end -->
+
+</div>
+<!-- Content end -->
+
+
+<script layout:fragment="client-script">
+    $(function(){
+        $('#form-action').on('submit', function(e){
+            e.preventDefault();
+            $.ajax({
+                url: $('#form-action').attr("action"),
+                type: 'POST',
+                data: $('#form-action').serialize(),
+                success: function(response){
+                    location.reload();
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+
+
+
