@@ -68,6 +68,7 @@ public class MahasiswaEntity {
         this.createdBy = "SYSTEM";
         this.updatedAt = LocalDateTime.now();
         this.updatedBy = "SYSTEM";
+        
         if (model.getJurusan() != null) {
             this.jurusan = new JurusanEntity(model.getJurusan().getId());
         }

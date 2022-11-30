@@ -1,0 +1,19 @@
+<!-- Content start -->
+<form th:action="@{~/ruang/save}" method="post" xmlns:th="http://www.thymeleaf.org">
+  <h5 class="card-title mb-3">Kode</h5>
+  <input type="text" class="form-control mb-3" name="code" id="code" />
+
+  <h5 class="card-title mb-3">Nama</h5>
+  <input type="text" class="form-control mb-3" name="name" id="name" />
+
+  <h5 class="card-title mb-3">Lantai ke</h5>
+  <input type="number" class="form-control mb-3" name="lantaiKe" id="lantaiKe" />
+
+  <h5 class="card-title mb-3">Gedung</h5>
+  <select class="form-select mb-3" name="gedung.id">
+    <option value=""></option>
+    <option th:each="gedung : ${gedungList}" th:value="${gedung.id}" th:text="${gedung.name}"></option>
+  </select>
+
+  <button type="submit" class="btn btn-success">Save</button>
+</form>

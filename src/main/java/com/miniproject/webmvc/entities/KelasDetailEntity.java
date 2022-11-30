@@ -1,5 +1,7 @@
 package com.miniproject.webmvc.entities;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.beans.BeanUtils;
+
+import com.miniproject.webmvc.models.KelasDetailModel;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -38,6 +44,19 @@ public class KelasDetailEntity {
     private MahasiswaEntity mahasiswa;
 
     public KelasDetailEntity() {
+    }
+    
+    public KelasDetailEntity(KelasDetailModel model) {
+        BeanUtils.copyProperties(model, this);
+        this.id = UUID.randomUUID().toString();
+
+        if (model.getKelas() != null) {
+            this.kelas = new KelasEntity(model.getKelas().getId());
+        }
+
+        if (model.getMahasiswa() != null) {
+            this.kelas = new KelasEntity(model.getMahasiswa().getId());
+        }
     }
 
 }
