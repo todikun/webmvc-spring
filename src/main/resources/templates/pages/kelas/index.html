@@ -14,19 +14,36 @@
                             <thead>
                                 <tr>
                                     <td>Kode</td>
-                                    <td>Name</td>
-                                    <td>Lantaike</td>
-                                    <td>Gedung</td>
+                                    <td>Hari</td>
+                                    <td>Jam</td>
+                                    <td>Ruang</td>
+                                    <td>Mata Kuliah</td>
+                                    <td>Dosen</td>
+                                    <td>Status</td>
+                                    <td>TA</td>
+                                    <td>Sem</td>
+                                    <td>Quota</td>
+                                    <td>Online</td>
                                     <td>Action</td>
                                 </tr>
                             </thead>
 
                             <tbody class="table-group-divider">
                                 <tr th:each="data : ${dataList}">
-                                    <td th:text="${data.code}"></td>
-                                    <td th:text="${data.name}"></td>
-                                    <td th:text="${data.lantaiKe}"></td>
-                                    <td th:text="${data.Gedung.name}"></td>
+                                    <td th:text="${data.kode}"></td>
+                                    <td th:text="${data.namaHari}"></td>
+                                    <td th:text="${{data.jamMulai + ' - ' + data.jamSelesai}}"></td>
+                                    <td th:text="${data.ruang.name}"></td>
+                                    <td th:text="${data.mataKuliah.name}"></td>
+                                    <td th:text="${data.dosen.name}"></td>
+                                    <td th:text="${data.status}"></td>
+                                    <td th:text="${data.tahunAjaran}"></td>
+                                    <td th:text="${data.semester}"></td>
+                                    <td th:text="${data.quota}"></td>
+                                    <td>
+                                        <span th:if="${data.bisaOnline}==true">Ya</span>
+                                        <span th:if="${data.bisaOnline}==false">Tidak</span>
+                                    </td>
                                     <td>
                                         <a class="btn btn-xs btn-secondary btn-detail"
                                             th:href="@{~/ruang/detail/{id}(id=${data.id})}">

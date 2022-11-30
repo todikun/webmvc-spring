@@ -2,22 +2,29 @@ package com.miniproject.webmvc.services.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.miniproject.webmvc.entities.KelasEntity;
 import com.miniproject.webmvc.models.KelasModel;
+import com.miniproject.webmvc.repos.KelasRepo;
 import com.miniproject.webmvc.services.KelasService;
 
+@Service
 public class KelasServiceImpl implements KelasService {
 
-    @Override
-    public Optional<KelasModel> delete(String id) {
-        // TODO Auto-generated method stub
-        return Optional.empty();
+    private KelasRepo repo;
+
+    @Autowired
+    public KelasServiceImpl(KelasRepo repo) {
+        this.repo = repo;
     }
 
     @Override
     public List<KelasModel> getAll() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.repo.findAll().stream().map(KelasModel::new).collect(Collectors.toList());
     }
 
     @Override
@@ -28,8 +35,17 @@ public class KelasServiceImpl implements KelasService {
 
     @Override
     public Optional<KelasModel> save(KelasModel request) {
-        // TODO Auto-generated method stub
-        return Optional.empty();
+        if (request == null) {
+            return Optional.empty();
+        }
+
+        KelasEntity result = new KelasEntity(request);
+        try {
+            this.repo.save(result);
+            return Optional.of(new KelasModel(result));
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 
     @Override
@@ -37,5 +53,10 @@ public class KelasServiceImpl implements KelasService {
         // TODO Auto-generated method stub
         return Optional.empty();
     }
-    
+
+    @Override
+    public Optional<KelasModel> delete(String id) {
+        // TODO Auto-generated method stub
+        return Optional.empty();
+    }
 }

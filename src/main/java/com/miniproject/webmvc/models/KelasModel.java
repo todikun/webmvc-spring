@@ -6,6 +6,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.miniproject.webmvc.entities.KelasEntity;
 
@@ -19,8 +20,10 @@ public class KelasModel {
     private String kode;
     private String namaHari;
     @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
     private Date jamMulai;
     @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
     private Date jamSelesai;
     private String ruangId;
     private RuangModel ruang;
@@ -40,19 +43,20 @@ public class KelasModel {
     public KelasModel(KelasEntity entity) {
         BeanUtils.copyProperties(entity, this);
         if (entity.getRuang() != null) {
-            ruangId = entity.getRuangId();
-            ruang = new RuangModel(entity.getRuang());
+        ruangId = entity.getRuangId();
+        ruang = new RuangModel(entity.getRuang());
         }
-        
+
         if (entity.getMataKuliah() != null) {
-            mataKuliahId = entity.getMatakuliahId();
-            mataKuliah = new MataKuliahModel(entity.getMataKuliah());
+        mataKuliahId = entity.getMataKuliahId();
+        mataKuliah = new MataKuliahModel(entity.getMataKuliah());
         }
-        
+
         if (entity.getDosen() != null) {
-            dosenId = entity.getDosenId();
-            dosen = new DosenModel(entity.getDosen());
+        dosenId = entity.getDosenId();
+        dosen = new DosenModel(entity.getDosen());
         }
+
     }
 
 }
