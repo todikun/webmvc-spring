@@ -1,26 +1,40 @@
 package com.miniproject.webmvc.config;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.miniproject.webmvc.entities.FakultasEntity;
 import com.miniproject.webmvc.entities.GedungEntity;
 import com.miniproject.webmvc.entities.JurusanEntity;
+import com.miniproject.webmvc.entities.RoleEntity;
 import com.miniproject.webmvc.entities.RuangEntity;
+import com.miniproject.webmvc.entities.UserEntity;
 import com.miniproject.webmvc.repos.FakultasRepo;
 import com.miniproject.webmvc.repos.GedungRepo;
+import com.miniproject.webmvc.services.RoleService;
+import com.miniproject.webmvc.services.UserService;
 
 @Service
 public class DbInit implements CommandLineRunner {
 
     private FakultasRepo fakultasRepo;
     private GedungRepo gedungRepo;
+    private PasswordEncoder encoder;
+    private UserService userService;
+    private RoleService roleService;
 
     @Autowired
-    public DbInit(FakultasRepo fakultasRepo, GedungRepo gedungRepo) {
+    public DbInit(FakultasRepo fakultasRepo, GedungRepo gedungRepo, PasswordEncoder encoder, UserService userService,
+            RoleService roleService) {
         this.fakultasRepo = fakultasRepo;
         this.gedungRepo = gedungRepo;
+        this.encoder = encoder;
+        this.userService = userService;
+        this.roleService = roleService;
     }
 
     private void initFakultas() {
@@ -60,8 +74,37 @@ public class DbInit implements CommandLineRunner {
         }
     }
 
+    private void initUserAndRole() {
+        if (roleService.getCount() == 0) {
+            this.roleService.save(Arrays.asList(
+                    new RoleEntity("ROLE_ADMIN"),
+                    new RoleEntity("ROLE_USER"),
+                    new RoleEntity("ROLE_DOSEN"),
+                    new RoleEntity("ROLE_MAHASISWA"),
+                    new RoleEntity("ROLE_KEUANGAN")));
+        }
+
+        if (userService.getCount() == 0) {
+            RoleEntity adminRole = roleService.getByName("ROLE_ADMIN");
+            UserEntity admin = new UserEntity("admin", encoder.encode("admin123"), "admin@gmail.com",
+                    Arrays.asList(adminRole));
+            this.userService.save(admin);
+
+            RoleEntity mhsRole = roleService.getByName("ROLE_MAHASISWA");
+            UserEntity mhs = new UserEntity("mahasiswa", encoder.encode("mahasiswa123"), "mahasiswa@gmail.com",
+                    Arrays.asList(mhsRole));
+            this.userService.save(mhs);
+
+            RoleEntity dosenRole = roleService.getByName("ROLE_DOSEN");
+            UserEntity dosen = new UserEntity("dosen", encoder.encode("dosen123"), "dosen@gmail.com",
+                    Arrays.asList(dosenRole));
+            this.userService.save(dosen);
+        }
+    }
+
     @Override
     public void run(String... args) throws Exception {
+        initUserAndRole();
         initFakultas();
         initGedung();
     }

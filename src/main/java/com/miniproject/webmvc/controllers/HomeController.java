@@ -1,15 +1,15 @@
 package com.miniproject.webmvc.controllers;
 
 import com.miniproject.webmvc.repos.*;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping
 public class HomeController {
 
     private MahasiswaRepo mahasiswaRepo;
@@ -38,7 +38,7 @@ public class HomeController {
         this.ruangRepo = ruangRepo;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public ModelAndView index(Model model) {
         ModelAndView view = new ModelAndView("pages/index.html");
 
@@ -62,5 +62,10 @@ public class HomeController {
         view.addObject("gedung", gedungCount);
         view.addObject("ruang", ruangCount);
         return view;
+    }
+
+    @GetMapping("/login")
+    public ModelAndView login() {
+        return new ModelAndView("pages/login");
     }
 }
