@@ -39,6 +39,21 @@ public class KelasServiceImpl implements KelasService {
             return Optional.empty();
         }
 
+        List<KelasEntity> checkJamMataKuliah = this.repo.validasiJamMataKuliah(
+                request.getJamMulai(),
+                request.getJamSelesai(),
+                request.getMataKuliah().getId());
+
+        if (!checkJamMataKuliah.isEmpty()) {
+            return Optional.empty();
+        }
+
+        List<KelasEntity> checkHariDanJam = this.repo.validasiHariDanJam(request.getNamaHari(), request.getJamMulai(),
+                request.getJamSelesai());
+        if (!checkHariDanJam.isEmpty()) {
+            return Optional.empty();
+        }
+
         KelasEntity result = new KelasEntity(request);
         try {
             this.repo.save(result);
