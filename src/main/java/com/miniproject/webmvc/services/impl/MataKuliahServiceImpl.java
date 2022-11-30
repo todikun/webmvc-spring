@@ -7,12 +7,14 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.miniproject.webmvc.entities.MataKuliahEntity;
 import com.miniproject.webmvc.models.MataKuliahModel;
 import com.miniproject.webmvc.repos.MataKuliahRepo;
 import com.miniproject.webmvc.services.MataKuliahService;
 
+@Service
 public class MataKuliahServiceImpl implements MataKuliahService {
 
     private MataKuliahRepo repo;

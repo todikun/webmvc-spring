@@ -1,31 +1,14 @@
-<!-- Content start -->
-<div class="container-fluid p-0" xmlns:th="http://www.thymeleaf.org"
-     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main}"
-     layout:fragment="content">
+<form th:action="@{~/fakultas/update}" method="post" xmlns:th="http://www.thymeleaf.org">
+    <input type="hidden" name="id" th:value="${data.id}">
+    <h5 class="card-title mb-3">Kode</h5>
+    <input type="text" class="form-control mb-3" name="code" id="code" th:value="${data.code}">
 
-    <h1 class="h3 mb-3">Edit Fakultas</h1>
+    <h5 class="card-title mb-3">Nama</h5>
+    <input type="text" class="form-control mb-3" name="name" id="name" th:value="${data.name}">
 
-    <div class="row">
-        <div class="col-8">
-            <div class="card">
-                <div class="card-body">
-                    <form th:action="@{~/fakultas/update}" method="post">
-                        <input type="hidden" name="id" th:value="${data.id}">
-                        <h5 class="card-title mb-3">Kode</h5>
-                        <input type="text" class="form-control mb-3" name="code" id="code" th:value="${data.code}">
+    <h5 class="card-title mb-3">Alamat</h5>
+    <textarea class="form-control mb-3" rows="2" placeholder="Alamat" name="alamat" id="alamat"
+        th:text="${data.alamat}"></textarea>
 
-                        <h5 class="card-title mb-3">Nama</h5>
-                        <input type="text" class="form-control mb-3" name="name" id="name" th:value="${data.name}">
-
-                        <h5 class="card-title mb-3">Alamat</h5>
-                        <textarea class="form-control mb-3" rows="2" placeholder="Alamat" name="alamat" id="alamat"
-                                  th:text="${data.alamat}"></textarea>
-
-                        <button type="submit" class="btn btn-success">Update</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Content end -->
+    <button type="submit" class="btn btn-success">Update</button>
+</form>

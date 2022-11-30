@@ -1,40 +1,22 @@
-<!-- Content start -->
-<div class="container-fluid p-0" xmlns:th="http://www.thymeleaf.org"
-     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main}"
-     layout:fragment="content">
+<form th:action="@{~/dosen/save}" method="post" xmlns:th="http://www.thymeleaf.org">
+    <h5 class="card-title mb-3">NIP</h5>
+    <input type="text" class="form-control mb-3" name="nip" id="nip">
 
-    <h1 class="h3 mb-3">Add Dosen</h1>
+    <h5 class="card-title mb-3">Nama</h5>
+    <input type="text" class="form-control mb-3" name="name" id="name">
 
-    <div class="row">
-        <div class="col-8">
-            <div class="card">
-                <div class="card-body">
-                    <form th:action="@{~/dosen/save}" method="post">
-                        <h5 class="card-title mb-3">NIP</h5>
-                        <input type="text" class="form-control mb-3" name="nip" id="nip">
+    <h5 class="card-title mb-3">Jenis Kelamin</h5>
+    <select class="form-select mb-3" name="jk">
+        <option value=""></option>
+        <option th:value="Pria">Pria</option>
+        <option th:value="Wanita">Wanita</option>
+    </select>
 
-                        <h5 class="card-title mb-3">Nama</h5>
-                        <input type="text" class="form-control mb-3" name="name" id="name">
+    <h5 class="card-title mb-3">Alamat</h5>
+    <textarea class="form-control mb-3" rows="2" placeholder="Alamat" name="alamat" id="alamat"></textarea>
 
-                        <h5 class="card-title mb-3">Jenis Kelamin</h5>
-                        <select class="form-select mb-3" name="jk">
-                            <option value=""></option>
-                            <option th:value="Pria">Pria</option>
-                            <option th:value="Wanita">Wanita</option>
-                        </select>
+    <h5 class="card-title mb-3">Gelar</h5>
+    <input type="text" class="form-control mb-3" name="gelar" id="gelar">
 
-                        <h5 class="card-title mb-3">Alamat</h5>
-                        <textarea class="form-control mb-3" rows="2" placeholder="Alamat" name="alamat" id="alamat"></textarea>
-
-                        <h5 class="card-title mb-3">Gelar</h5>
-                        <input type="text" class="form-control mb-3" name="gelar" id="gelar">
-
-                        <button type="submit" class="btn btn-success">Save</button>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Content end -->
+    <button type="submit" class="btn btn-success">Save</button>
+</form>

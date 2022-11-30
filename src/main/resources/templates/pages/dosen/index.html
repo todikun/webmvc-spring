@@ -1,61 +1,127 @@
-<!-- Content start -->
-<div class="container-fluid p-0" xmlns:th="http://www.thymeleaf.org"
-     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main}"
-     layout:fragment="content">
+<body xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
 
-    <h1 class="h3 mb-3">Dosen</h1>
+    <!-- Content start -->
+    <div class="container-fluid p-0" layout:fragment="content">
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <a th:href="@{~/dosen/add}"
-                       class="btn btn-primary mb-3">
-                        <i class="align-middle" data-feather="plus"></i>
-                    </a>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <td>NIP</td>
-                            <td>Nama</td>
-                            <td>Jenis Kelamin</td>
-                            <td>Alamat</td>
-                            <td>Gelar</td>
-                            <td>Action</td>
-                        </tr>
-                        </thead>
+        <h1 class="h3 mb-3">Dosen</h1>
 
-                        <tbody class="table-group-divider">
-                        <tr th:each="data : ${dataList}">
-                            <td th:text="${data.nip}"></td>
-                            <td th:text="${data.name}"></td>
-                            <td th:text="${data.jk}"></td>
-                            <td th:text="${data.alamat}"></td>
-                            <td th:text="${data.gelar}"></td>
-                            <td>
-                                <a class="btn btn-xs btn-secondary" th:href="@{~/dosen/detail/{id}(id=${data.id})}">
-                                    <i class="align-middle" data-feather="eye"></i>
-                                </a>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <a th:href="@{~/dosen/add}" class="btn btn-primary mb-3 btn-add">
+                            <i class="align-middle" data-feather="plus"></i>
+                        </a>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td>NIP</td>
+                                    <td>Nama</td>
+                                    <td>Jenis Kelamin</td>
+                                    <td>Alamat</td>
+                                    <td>Gelar</td>
+                                    <td>Action</td>
+                                </tr>
+                            </thead>
 
-                                <a class="btn btn-xs btn-warning" th:href="@{~/dosen/edit/{id}(id=${data.id})}">
-                                    <i class="align-middle" data-feather="edit"></i>
-                                </a>
+                            <tbody class="table-group-divider">
+                                <tr th:each="data : ${dataList}">
+                                    <td th:text="${data.nip}"></td>
+                                    <td th:text="${data.name}"></td>
+                                    <td th:text="${data.jk}"></td>
+                                    <td th:text="${data.alamat}"></td>
+                                    <td th:text="${data.gelar}"></td>
+                                    <td>
+                                        <a class="btn btn-xs btn-secondary btn-detail"
+                                            th:href="@{~/dosen/detail/{id}(id=${data.id})}">
+                                            <i class="align-middle" data-feather="eye"></i>
+                                        </a>
 
-                                <form th:action="@{~/dosen/delete}" method="post"
-                                      class="d-inline"
-                                      onsubmit="return confirm('Yakin hapus data ?')">
-                                    <input type="hidden" name="id" th:value="${data.id}">
-                                    <button type="submit" class="btn btn-xs btn-danger">
-                                        <i class="align-middle" data-feather="trash-2"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                                        <a class="btn btn-xs btn-warning btn-edit"
+                                            th:href="@{~/dosen/edit/{id}(id=${data.id})}">
+                                            <i class="align-middle" data-feather="edit"></i>
+                                        </a>
+
+                                        <form th:action="@{~/dosen/delete}" method="post" class="d-inline"
+                                            onsubmit="return confirm('Yakin hapus data ?')">
+                                            <input type="hidden" name="id" th:value="${data.id}" />
+                                            <button type="submit" class="btn btn-xs btn-danger">
+                                                <i class="align-middle" data-feather="trash-2"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Content end -->
+    <!-- Content end -->
+
+
+    <script layout:fragment="client-script">
+        // event button edit
+        $('.btn-edit').on('click', function (e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+
+            $.ajax({
+                url: url,
+                dataType: 'HTML',
+                method: 'GET',
+                success: function (result) {
+                    $('#modal-form').find('#modal-label').html('Edit Dosen');
+                    $('#modal-form').find('.modal-body').html(result);
+                    $('#modal-form').modal('show');
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+            });
+        });
+
+        // event button add
+        $('.btn-add').on('click', function (e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+
+            $.ajax({
+                url: url,
+                dataType: 'HTML',
+                method: 'GET',
+                success: function (result) {
+                    $('#modal-form').find('#modal-label').html('Add Dosen');
+                    $('#modal-form').find('.modal-body').html(result);
+                    $('#modal-form').modal('show');
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+            });
+        });
+
+        // event button detail
+        $('.btn-detail').on('click', function (e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+
+            $.ajax({
+                url: url,
+                dataType: 'HTML',
+                method: 'GET',
+                success: function (result) {
+                    $('#modal-form').find('#modal-label').html('Detail Dosen');
+                    $('#modal-form').find('.modal-body').html(result);
+                    $('#modal-form').modal('show');
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+            });
+        });
+    </script>
+
+</body>

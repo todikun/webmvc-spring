@@ -1,29 +1,12 @@
-<!-- Content start -->
-<div class="container-fluid p-0" xmlns:th="http://www.thymeleaf.org"
-     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main}"
-     layout:fragment="content">
+<form th:action="@{~/matakuliah/save}" method="post" xmlns:th="http://www.thymeleaf.org">
+    <h5 class="card-title mb-3">Kode</h5>
+    <input type="text" class="form-control mb-3" name="code" id="code">
 
-    <h1 class="h3 mb-3">Add Matakuliah</h1>
+    <h5 class="card-title mb-3">Nama</h5>
+    <input type="text" class="form-control mb-3" name="name" id="name">
 
-    <div class="row">
-        <div class="col-8">
-            <div class="card">
-                <div class="card-body">
-                    <form th:action="@{~/matakuliah/save}" method="post">
-                        <h5 class="card-title mb-3">Kode</h5>
-                        <input type="text" class="form-control mb-3" name="code" id="code">
+    <h5 class="card-title mb-3">Sks</h5>
+    <input type="number" class="form-control mb-3" name="sks" id="sks">
 
-                        <h5 class="card-title mb-3">Nama</h5>
-                        <input type="text" class="form-control mb-3" name="name" id="name">
-
-                        <h5 class="card-title mb-3">Sks</h5>
-                        <input type="number" class="form-control mb-3" name="sks" id="sks">
-
-                        <button type="submit" class="btn btn-success">Save</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Content end -->
+    <button type="submit" class="btn btn-success">Save</button>
+</form>

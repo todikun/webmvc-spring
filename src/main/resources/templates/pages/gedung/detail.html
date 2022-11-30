@@ -1,29 +1,11 @@
-<!-- Content start -->
-<div class="container-fluid p-0" xmlns:th="http://www.thymeleaf.org"
-     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main}"
-     layout:fragment="content">
+<form action="#" xmlns:th="http://www.thymeleaf.org">
+    <h5 class="card-title mb-3">Kode</h5>
+    <input readonly="readonly" type="text" class="form-control mb-3" name="code" id="code" th:value="${data.code}">
 
-    <h1 class="h3 mb-3">Detail Gedung</h1>
+    <h5 class="card-title mb-3">Nama</h5>
+    <input readonly="readonly" type="text" class="form-control mb-3" name="name" id="name" th:value="${data.name}">
 
-    <div class="row">
-        <div class="col-8">
-            <div class="card">
-                <div class="card-body">
-                    <form action="#">
-                        <h5 class="card-title mb-3">Kode</h5>
-                        <input readonly="readonly" type="text" class="form-control mb-3" name="code" id="code" th:value="${data.code}">
-
-                        <h5 class="card-title mb-3">Nama</h5>
-                        <input readonly="readonly" type="text" class="form-control mb-3" name="name" id="name" th:value="${data.name}">
-
-                        <h5 class="card-title mb-3">Jumlah Lantai</h5>
-                        <input readonly="readonly" type="number" class="form-control mb-3" name="jmlLantai" id="jmlLantai"
-                               th:value="${data.jmlLantai}">
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Content end -->
+    <h5 class="card-title mb-3">Jumlah Lantai</h5>
+    <input readonly="readonly" type="number" class="form-control mb-3" name="jmlLantai" id="jmlLantai"
+        th:value="${data.jmlLantai}">
+</form>
