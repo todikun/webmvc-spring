@@ -13,24 +13,22 @@ import com.miniproject.webmvc.entities.KelasEntity;
 @Repository
 public interface KelasRepo extends JpaRepository<KelasEntity, String> {
 
-    @Query("select t from KelasEntity t where t.jamMulai>= :jamMulai and t.jamSelesai<= :jamSelesai and t.mataKuliahId= :id")
-    List<KelasEntity> validasiJamMataKuliah(
-        @Param("jamMulai") Date jamMulai,
-        @Param("jamSelesai") Date jamSelesai,
-        @Param("id") String id
-    );
+        @Query("select t from KelasEntity t where t.jamMulai>= :jamMulai or t.jamSelesai<= :jamSelesai and t.ruangId= :ruangId")
+        List<KelasEntity> validasiJamRuang(
+                        @Param("jamMulai") Date jamMulai,
+                        @Param("jamSelesai") Date jamSelesai,
+                        @Param("ruangId") String ruangId);
 
-    @Query("select t from KelasEntity t where t.ruangId= :id and t.namaHari= :namaHari and t.jamMulai>= :jamMulai and t.jamSelesai<= :jamSelesai")
-    List<KelasEntity> validasiPertama(
-            @Param("id") String id,
-            @Param("namaHari") String namaHari,
-            @Param("jamMulai") Date jamMulai,
-            @Param("jamSelesai") Date jamSelesai);
+        @Query("select t from KelasEntity t where t.ruangId= :ruangId and t.namaHari= :namaHari and t.jamMulai>= :jamMulai or t.jamSelesai<= :jamSelesai")
+        List<KelasEntity> validasiRuangHariJam(
+                        @Param("ruangId") String ruangId,
+                        @Param("namaHari") String namaHari,
+                        @Param("jamMulai") Date jamMulai,
+                        @Param("jamSelesai") Date jamSelesai);
 
-    @Query("select t from KelasEntity t where t.namaHari= :namaHari and t.jamMulai>= :jamMulai and t.jamSelesai<= :jamSelesai")
-    List<KelasEntity> validasiHariDanJam(
-            @Param("namaHari") String namaHari,
-            @Param("jamMulai") Date jamMulai,
-            @Param("jamSelesai") Date jamSelesai);
+        @Query("select t from KelasEntity t where t.jamMulai>= :jamMulai or t.jamSelesai<= :jamSelesai")
+        List<KelasEntity> validasiJam(
+                        @Param("jamMulai") Date jamMulai,
+                        @Param("jamSelesai") Date jamSelesai);
 
 }

@@ -2,9 +2,6 @@ package com.miniproject.webmvc.models;
 
 import java.util.Date;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -19,10 +16,8 @@ public class KelasModel {
     private String id;
     private String kode;
     private String namaHari;
-    @Temporal(TemporalType.TIME)
     @DateTimeFormat(pattern = "HH:mm")
     private Date jamMulai;
-    @Temporal(TemporalType.TIME)
     @DateTimeFormat(pattern = "HH:mm")
     private Date jamSelesai;
     private String ruangId;

@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.beans.BeanUtils;
 
@@ -35,9 +37,11 @@ public class KelasEntity {
     @Column(name = "hari")
     private String namaHari;
 
+    @Temporal(TemporalType.TIME)
     @Column(name = "jam_mulai")
     private Date jamMulai;
 
+    @Temporal(TemporalType.TIME)
     @Column(name = "jam_selesai")
     private Date jamSelesai;
 
