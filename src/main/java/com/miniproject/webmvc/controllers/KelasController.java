@@ -16,6 +16,7 @@ import com.miniproject.webmvc.services.KelasService;
 import com.miniproject.webmvc.services.MataKuliahService;
 import com.miniproject.webmvc.services.RuangService;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -58,9 +59,13 @@ public class KelasController {
         List<RuangModel> ruang = ruangService.getAll();
         List<MataKuliahModel> mataKuliah = mataKuliahService.getAll();
         List<DosenModel> dosen = dosenService.getAll();
+        List<String> hari = Arrays.asList(
+                "Senin", "Selasa", "Rabu", "Kamis", "Jumat");
+
         view.addObject("ruangList", ruang);
         view.addObject("mataKuliahList", mataKuliah);
         view.addObject("dosenList", dosen);
+        view.addObject("hariList", hari);
         return view;
     }
 

@@ -42,12 +42,17 @@ public class KelasServiceImpl implements KelasService {
         List<KelasEntity> firstCheck = this.repo.firstValidation(
         request.getNamaHari(),
         request.getRuang().getId(),
-        request.getMataKuliah().getId(),
         request.getDosen().getId(),
         request.getJamMulai(),
         request.getJamSelesai());   
 
-        if (!firstCheck.isEmpty()) {
+        List<KelasEntity> secondCheck = this.repo.secondValidation(
+        request.getNamaHari(),
+        request.getRuang().getId(),
+        request.getJamMulai(),
+        request.getJamSelesai());  
+
+        if (!firstCheck.isEmpty() || !secondCheck.isEmpty()) {
             return Optional.empty();
         }
 
