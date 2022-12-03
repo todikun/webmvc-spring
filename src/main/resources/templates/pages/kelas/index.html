@@ -32,7 +32,7 @@
                                 <tr th:each="data : ${dataList}">
                                     <td th:text="${data.kode}"></td>
                                     <td th:text="${data.namaHari}"></td>
-                                    <td th:text="${{data.jamMulai + ' - ' + data.jamSelesai}}"></td>
+                                    <td th:text="${data.jamMulai + ' - ' + data.jamSelesai}"></td>
                                     <td th:text="${data.ruang.name}"></td>
                                     <td th:text="${data.mataKuliah.name}"></td>
                                     <td th:text="${data.dosen.name}"></td>

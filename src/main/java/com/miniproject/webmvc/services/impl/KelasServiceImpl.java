@@ -45,21 +45,9 @@ public class KelasServiceImpl implements KelasService {
         request.getMataKuliah().getId(),
         request.getDosen().getId(),
         request.getJamMulai(),
-        request.getJamSelesai());
+        request.getJamSelesai());   
 
-        List<KelasEntity> secondCheck = this.repo.secondValidation(
-        request.getNamaHari(),
-        request.getDosen().getId(),
-        request.getJamMulai(),
-        request.getJamSelesai());
-
-        List<KelasEntity> thirdCheck = this.repo.thirdValidation(
-                request.getNamaHari(),
-                request.getRuang().getId(),
-                request.getJamMulai(),
-                request.getJamSelesai());
-
-        if (!firstCheck.isEmpty() || !secondCheck.isEmpty() || !thirdCheck.isEmpty()) {
+        if (!firstCheck.isEmpty()) {
             return Optional.empty();
         }
 
