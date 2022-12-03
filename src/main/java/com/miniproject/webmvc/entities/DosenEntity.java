@@ -74,6 +74,9 @@ public class DosenEntity {
         this.jk = jk;
         this.alamat = alamat;
         this.gelar = gelar;
+        this.createdAt = LocalDateTime.now();
+        this.createdBy = "SYSTEM";
+        this.id = UUID.randomUUID().toString();
     }
 
     public DosenEntity(DosenModel model) {

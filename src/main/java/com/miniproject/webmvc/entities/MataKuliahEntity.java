@@ -58,6 +58,19 @@ public class MataKuliahEntity {
 
     }
 
+    
+
+    public MataKuliahEntity(String code, String name, Integer sks) {
+        this.code = code;
+        this.name = name;
+        this.sks = sks;
+        this.createdAt = LocalDateTime.now();
+        this.createdBy = "SYSTEM";
+        this.id = UUID.randomUUID().toString();
+    }
+
+
+
     public MataKuliahEntity(MataKuliahModel model) {
         BeanUtils.copyProperties(model, this);
         this.id = UUID.randomUUID().toString();

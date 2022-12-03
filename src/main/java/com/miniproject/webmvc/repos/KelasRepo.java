@@ -13,21 +13,29 @@ import com.miniproject.webmvc.entities.KelasEntity;
 @Repository
 public interface KelasRepo extends JpaRepository<KelasEntity, String> {
 
-        @Query("select t from KelasEntity t where t.jamMulai>= :jamMulai or t.jamSelesai<= :jamSelesai and t.ruangId= :ruangId")
-        List<KelasEntity> validasiJamRuang(
-                        @Param("jamMulai") Date jamMulai,
-                        @Param("jamSelesai") Date jamSelesai,
-                        @Param("ruangId") String ruangId);
-
-        @Query("select t from KelasEntity t where t.ruangId= :ruangId and t.namaHari= :namaHari and t.jamMulai>= :jamMulai or t.jamSelesai<= :jamSelesai")
-        List<KelasEntity> validasiRuangHariJam(
-                        @Param("ruangId") String ruangId,
+        // validasi -> Hari, ruang, mk, dosen, jam
+        @Query("select t from KelasEntity t where t.namaHari= :namaHari and t.ruangId= :ruangId and t.mataKuliahId= :mataKuliahId and t.dosenId= :dosenId and t.jamMulai>= :jamMulai or t.jamSelesai<= :jamSelesai")
+        List<KelasEntity> firstValidation(
                         @Param("namaHari") String namaHari,
+                        @Param("ruangId") String ruangId,
+                        @Param("mataKuliahId") String mataKuliahId,
+                        @Param("dosenId") String dosenId,
                         @Param("jamMulai") Date jamMulai,
                         @Param("jamSelesai") Date jamSelesai);
 
-        @Query("select t from KelasEntity t where t.jamMulai>= :jamMulai or t.jamSelesai<= :jamSelesai")
-        List<KelasEntity> validasiJam(
+        // validasi -> Hari, dosen, jam
+        @Query("select t from KelasEntity t where t.namaHari= :namaHari and t.dosenId= :dosenId and t.jamMulai>= :jamMulai or t.jamSelesai<= :jamSelesai")
+        List<KelasEntity> secondValidation(
+                        @Param("namaHari") String namaHari,
+                        @Param("dosenId") String dosenId,
+                        @Param("jamMulai") Date jamMulai,
+                        @Param("jamSelesai") Date jamSelesai);
+
+        // validasi -> Hari, ruang, jam
+        @Query("select t from KelasEntity t where t.namaHari= :namaHari and t.ruangId= :ruangId and t.jamMulai>= :jamMulai or t.jamSelesai<= :jamSelesai")
+        List<KelasEntity> thirdValidation(
+                        @Param("namaHari") String namaHari,
+                        @Param("ruangId") String ruangId,
                         @Param("jamMulai") Date jamMulai,
                         @Param("jamSelesai") Date jamSelesai);
 

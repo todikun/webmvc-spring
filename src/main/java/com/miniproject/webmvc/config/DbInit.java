@@ -7,14 +7,18 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.miniproject.webmvc.entities.DosenEntity;
 import com.miniproject.webmvc.entities.FakultasEntity;
 import com.miniproject.webmvc.entities.GedungEntity;
 import com.miniproject.webmvc.entities.JurusanEntity;
+import com.miniproject.webmvc.entities.MataKuliahEntity;
 import com.miniproject.webmvc.entities.RoleEntity;
 import com.miniproject.webmvc.entities.RuangEntity;
 import com.miniproject.webmvc.entities.UserEntity;
+import com.miniproject.webmvc.repos.DosenRepo;
 import com.miniproject.webmvc.repos.FakultasRepo;
 import com.miniproject.webmvc.repos.GedungRepo;
+import com.miniproject.webmvc.repos.MataKuliahRepo;
 import com.miniproject.webmvc.services.RoleService;
 import com.miniproject.webmvc.services.UserService;
 
@@ -22,15 +26,19 @@ import com.miniproject.webmvc.services.UserService;
 public class DbInit implements CommandLineRunner {
 
     private FakultasRepo fakultasRepo;
+    private DosenRepo dosenRepo;
+    private MataKuliahRepo mataKuliahRepo; 
     private GedungRepo gedungRepo;
     private PasswordEncoder encoder;
     private UserService userService;
     private RoleService roleService;
 
     @Autowired
-    public DbInit(FakultasRepo fakultasRepo, GedungRepo gedungRepo, PasswordEncoder encoder, UserService userService,
+    public DbInit(FakultasRepo fakultasRepo, DosenRepo dosenRepo, MataKuliahRepo mataKuliahRepo, GedungRepo gedungRepo, PasswordEncoder encoder, UserService userService,
             RoleService roleService) {
         this.fakultasRepo = fakultasRepo;
+        this.dosenRepo = dosenRepo;
+        this.mataKuliahRepo = mataKuliahRepo;
         this.gedungRepo = gedungRepo;
         this.encoder = encoder;
         this.userService = userService;
@@ -74,6 +82,24 @@ public class DbInit implements CommandLineRunner {
         }
     }
 
+    private void initDosen() {
+        if (dosenRepo.count() == 0) {
+            DosenEntity dosenSatu = new DosenEntity("123", "Todi Rahmat", "Pria", "Jambi", "M.Kom");
+            DosenEntity dosenDua = new DosenEntity("456", "Hesti Aisyah", "Wanita", "Padang", "M.Si");
+            this.dosenRepo.save(dosenSatu);
+            this.dosenRepo.save(dosenDua);
+        }
+    }
+
+    private void initMataKuliah() {
+        if (mataKuliahRepo.count() == 0) {
+            MataKuliahEntity mataKuliahSatu = new MataKuliahEntity("MK001", "Pemrograman Java I", 4);
+            MataKuliahEntity mataKuliahDua = new MataKuliahEntity("MK002", "Perancangan Basis Data", 4);
+            this.mataKuliahRepo.save(mataKuliahSatu);
+            this.mataKuliahRepo.save(mataKuliahDua);
+        }
+    }
+
     private void initUserAndRole() {
         if (roleService.getCount() == 0) {
             this.roleService.save(Arrays.asList(
@@ -86,17 +112,17 @@ public class DbInit implements CommandLineRunner {
 
         if (userService.getCount() == 0) {
             RoleEntity adminRole = roleService.getByName("ROLE_ADMIN");
-            UserEntity admin = new UserEntity("admin", encoder.encode("admin123"), "admin@gmail.com",
+            UserEntity admin = new UserEntity("admin", encoder.encode("admin"), "admin@gmail.com",
                     Arrays.asList(adminRole));
             this.userService.save(admin);
 
             RoleEntity mhsRole = roleService.getByName("ROLE_MAHASISWA");
-            UserEntity mhs = new UserEntity("mahasiswa", encoder.encode("mahasiswa123"), "mahasiswa@gmail.com",
+            UserEntity mhs = new UserEntity("mahasiswa", encoder.encode("mahasiswa"), "mahasiswa@gmail.com",
                     Arrays.asList(mhsRole));
             this.userService.save(mhs);
 
             RoleEntity dosenRole = roleService.getByName("ROLE_DOSEN");
-            UserEntity dosen = new UserEntity("dosen", encoder.encode("dosen123"), "dosen@gmail.com",
+            UserEntity dosen = new UserEntity("dosen", encoder.encode("dosen"), "dosen@gmail.com",
                     Arrays.asList(dosenRole));
             this.userService.save(dosen);
         }
@@ -107,5 +133,7 @@ public class DbInit implements CommandLineRunner {
         initUserAndRole();
         initFakultas();
         initGedung();
+        initDosen();
+        initMataKuliah();
     }
 }

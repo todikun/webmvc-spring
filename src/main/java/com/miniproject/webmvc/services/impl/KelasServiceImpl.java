@@ -39,27 +39,27 @@ public class KelasServiceImpl implements KelasService {
             return Optional.empty();
         }
 
-        List<KelasEntity> checkJamRuang = this.repo.validasiJamRuang(
-                request.getJamMulai(),
-                request.getJamSelesai(),
-                request.getRuang().getId());
-        if (!checkJamRuang.isEmpty()) {
-            return Optional.empty();
-        }
+        List<KelasEntity> firstCheck = this.repo.firstValidation(
+        request.getNamaHari(),
+        request.getRuang().getId(),
+        request.getMataKuliah().getId(),
+        request.getDosen().getId(),
+        request.getJamMulai(),
+        request.getJamSelesai());
 
-        List<KelasEntity> checkJam = this.repo.validasiJam(
-                request.getJamMulai(),
-                request.getJamSelesai());
-        if (!checkJam.isEmpty()) {
-            return Optional.empty();
-        }
+        List<KelasEntity> secondCheck = this.repo.secondValidation(
+        request.getNamaHari(),
+        request.getDosen().getId(),
+        request.getJamMulai(),
+        request.getJamSelesai());
 
-        List<KelasEntity> checkRuangHariJam = this.repo.validasiRuangHariJam(
-                request.getRuang().getId(),
+        List<KelasEntity> thirdCheck = this.repo.thirdValidation(
                 request.getNamaHari(),
+                request.getRuang().getId(),
                 request.getJamMulai(),
                 request.getJamSelesai());
-        if (!checkRuangHariJam.isEmpty()) {
+
+        if (!firstCheck.isEmpty() || !secondCheck.isEmpty() || !thirdCheck.isEmpty()) {
             return Optional.empty();
         }
 
