@@ -58,7 +58,9 @@ public class MataKuliahEntity {
 
     }
 
-    
+    public MataKuliahEntity(String id) {
+        this.id = id;
+    }
 
     public MataKuliahEntity(String code, String name, Integer sks) {
         this.code = code;
@@ -69,8 +71,6 @@ public class MataKuliahEntity {
         this.id = UUID.randomUUID().toString();
     }
 
-
-
     public MataKuliahEntity(MataKuliahModel model) {
         BeanUtils.copyProperties(model, this);
         this.id = UUID.randomUUID().toString();
@@ -78,6 +78,16 @@ public class MataKuliahEntity {
         this.createdBy = "SYSTEM";
         this.updatedAt = LocalDateTime.now();
         this.updatedBy = "SYSTEM";
+    }
+
+    public void addKelas(KelasEntity kelas) {
+        this.kelas.add(kelas);
+        kelas.setMataKuliah(this);
+    }
+
+    public void removeKelas(KelasEntity kelas) {
+        this.kelas.remove(kelas);
+        kelas.setMataKuliah(this);
     }
 
     @PrePersist

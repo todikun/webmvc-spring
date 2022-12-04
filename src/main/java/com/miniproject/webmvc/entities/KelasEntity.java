@@ -107,19 +107,19 @@ public class KelasEntity {
         this.createdBy = "SYSTEM";
         this.updatedAt = LocalDateTime.now();
         this.updatedBy = "SYSTEM";
-        
+
         if (model.getRuang() != null) {
             RuangEntity ruangEntity = new RuangEntity();
             ruangEntity.setId(model.getRuang().getId());
             this.ruang = ruangEntity;
         }
-        
+
         if (model.getMataKuliah() != null) {
             MataKuliahEntity mataKuliahEntity = new MataKuliahEntity();
             mataKuliahEntity.setId(model.getMataKuliah().getId());
             this.mataKuliah = mataKuliahEntity;
         }
-        
+
         if (model.getDosen() != null) {
             DosenEntity dosenEntity = new DosenEntity();
             dosenEntity.setId(model.getDosen().getId());

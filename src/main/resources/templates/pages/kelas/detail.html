@@ -1,17 +1,43 @@
 <!-- Content start -->
-
 <form action="#" xmlns:th="http://www.thymeleaf.org">
-    <h5 class="card-title mb-3">Kode</h5>
-    <input readonly="readonly" type="text" class="form-control mb-3" name="code" id="code" th:value="${data.code}">
+       <input type="hidden" name="id" id="id" th:value="${data.id}">
+       <h5 class="card-title mb-3">Kode</h5>
+       <input type="text" class="form-control mb-3" name="kode" th:value="${data.kode}" placeholder="Kode" />
 
-    <h5 class="card-title mb-3">Nama</h5>
-    <input readonly="readonly" type="text" class="form-control mb-3" name="name" id="name" th:value="${data.name}">
+       <h5 class="card-title mb-3">Hari</h5>
+       <input type="text" class="form-control mb-3" name="namaHari" placeholder="Status" th:value="${data.namaHari}" />
 
-    <h5 class="card-title mb-3">Lantai ke</h5>
-    <input readonly="readonly" type="number" class="form-control mb-3" name="lantaiKe" id="lantaiKe"
-           th:value="${data.lantaiKe}">
+       <h5 class="card-title mb-3">Jam Mulai</h5>
+       <input type="time" class="form-control mb-3" name="jamMulai" th:value="${{data.jamMulai}}" />
 
-    <h5 class="card-title mb-3">Gedung</h5>
-    <input readonly="readonly" type="text" class="form-control mb-3" name="gedung" id="gedung"
-           th:value="${data.gedung.name}">
+       <h5 class="card-title mb-3">Jam Selesai</h5>
+       <input type="time" class="form-control mb-3" name="jamSelesai" th:value="${{data.jamSelesai}}" />
+
+       <h5 class="card-title mb-3">Ruang</h5>
+       <input type="text" class="form-control mb-3" name="status" placeholder="Status" th:value="${data.ruang.name}" />
+
+       <h5 class="card-title mb-3">Matakuliah</h5>
+       <input type="text" class="form-control mb-3" name="status" placeholder="Status"
+              th:value="${data.mataKuliah.name}" />
+
+       <h5 class="card-title mb-3">Dosen</h5>
+       <input type="text" class="form-control mb-3" name="status" placeholder="Status" th:value="${data.dosen.name}" />
+
+       <h5 class="card-title mb-3">Status</h5>
+       <input type="text" class="form-control mb-3" name="status" placeholder="Status" th:value="${data.status}" />
+
+       <h5 class="card-title mb-3">Tahun Ajaran</h5>
+       <input type="number" class="form-control mb-3" name="tahunAjaran" th:value="${data.tahunAjaran}" min="2000"
+              max="2100" placeholder="YYYY" />
+
+       <h5 class="card-title mb-3">Semester</h5>
+       <input type="text" class="form-control mb-3" name="semester" th:value="${data.semester}"
+              placeholder="Semester" />
+
+       <h5 class="card-title mb-3">Quota</h5>
+       <input type="number" class="form-control mb-3" name="quota" th:value="${data.quota}" placeholder="Quota" />
+
+       <h5 class="card-title mb-3">Online</h5>
+       <input type="text" class="form-control mb-3" name="status" placeholder="Status"
+              th:value="${data.bisaOnline} == true ? 'Ya':'Tidak' " />
 </form>

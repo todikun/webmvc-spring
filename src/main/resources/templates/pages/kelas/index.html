@@ -46,16 +46,16 @@
                                     </td>
                                     <td>
                                         <a class="btn btn-xs btn-secondary btn-detail"
-                                            th:href="@{~/ruang/detail/{id}(id=${data.id})}">
+                                            th:href="@{~/kelas/detail/{id}(id=${data.id})}">
                                             <i class="align-middle" data-feather="eye"></i>
                                         </a>
 
                                         <a class="btn btn-xs btn-warning btn-edit"
-                                            th:href="@{~/ruang/edit/{id}(id=${data.id})}">
+                                            th:href="@{~/kelas/edit/{id}(id=${data.id})}">
                                             <i class="align-middle" data-feather="edit"></i>
                                         </a>
 
-                                        <form th:action="@{~/ruang/delete}" method="post" class="d-inline"
+                                        <form th:action="@{~/kelas/delete}" method="post" class="d-inline"
                                             onsubmit="return confirm('Yakin hapus data ?')">
                                             <input type="hidden" name="id" th:value="${data.id}" />
                                             <button type="submit" class="btn btn-xs btn-danger">

@@ -17,7 +17,6 @@ import com.miniproject.webmvc.services.MataKuliahService;
 import com.miniproject.webmvc.services.RuangService;
 import com.miniproject.webmvc.utils.DateUtil;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -52,10 +51,7 @@ public class KelasController {
     }
 
     @GetMapping("/add")
-    public ModelAndView add(Model model) {
-        model.addAttribute("activePage", "kelas");
-        model.addAttribute("title", "Kelas");
-
+    public ModelAndView add() {
         ModelAndView view = new ModelAndView("pages/kelas/add.html");
         List<RuangModel> ruang = ruangService.getAll();
         List<MataKuliahModel> mataKuliah = mataKuliahService.getAll();
@@ -71,6 +67,55 @@ public class KelasController {
     @PostMapping("/save")
     public ModelAndView save(@ModelAttribute KelasModel request) {
         this.kelasService.save(request);
+        return new ModelAndView("redirect:/kelas");
+    }
+
+    @GetMapping("edit/{id}")
+    public ModelAndView edit(@PathVariable("id") String id, @ModelAttribute KelasModel request) {
+        KelasModel kelas = this.kelasService.getById(id);
+        if (kelas == null) {
+            return new ModelAndView("redirect:/kelas");
+        }
+
+        ModelAndView view = new ModelAndView("pages/kelas/edit.html");
+        List<RuangModel> ruang = ruangService.getAll();
+        List<MataKuliahModel> mataKuliah = mataKuliahService.getAll();
+        List<DosenModel> dosen = dosenService.getAll();
+
+        view.addObject("data", kelas);
+        view.addObject("ruangList", ruang);
+        view.addObject("mataKuliahList", mataKuliah);
+        view.addObject("dosenList", dosen);
+        view.addObject("hariList", DateUtil.hari());
+        return view;
+    }
+
+    @PostMapping("/update")
+    public ModelAndView update(@ModelAttribute KelasModel request) {
+        this.kelasService.update(request.getId(), request);
+        return new ModelAndView("redirect:/kelas");
+    }
+
+    @GetMapping("/detail/{id}")
+    public ModelAndView detail(@PathVariable("id") String id) {
+        KelasModel kelas = kelasService.getById(id);
+        if (kelas == null) {
+            return new ModelAndView("redirect:/kelas");
+        }
+
+        ModelAndView view = new ModelAndView("pages/kelas/detail.html");
+        view.addObject("data", kelas);
+        return view;
+    }
+
+    @PostMapping("/delete")
+    public ModelAndView delete(@ModelAttribute KelasModel request) {
+        KelasModel kelas = kelasService.getById(request.getId());
+        if (kelas == null) {
+            return new ModelAndView("redirect:/kelas");
+        }
+
+        this.kelasService.delete(request.getId());
         return new ModelAndView("redirect:/kelas");
     }
 }

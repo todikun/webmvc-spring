@@ -88,6 +88,16 @@ public class DosenEntity {
         this.updatedBy = "SYSTEM";
     }
 
+    public void addKelas(KelasEntity kelas) {
+        this.kelas.add(kelas);
+        kelas.setDosen(this);
+    }
+
+    public void removeKelas(KelasEntity kelas) {
+        this.kelas.remove(kelas);
+        kelas.setDosen(this);
+    }
+
     @PrePersist
     public void onCreated() {
         this.id = UUID.randomUUID().toString();

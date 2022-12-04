@@ -95,6 +95,16 @@ public class RuangEntity {
         this.updatedAt = LocalDateTime.now();
         this.updatedBy = "SYSTEM";
     }
+    
+    public void addKelas(KelasEntity kelas) {
+        this.kelas.add(kelas);
+        kelas.setRuang(this);
+    }
+
+    public void removeKelas(KelasEntity kelas) {
+        this.kelas.remove(kelas);
+        kelas.setRuang(this);
+    }
 
     @PrePersist
     public void onCreated() {

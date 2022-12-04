@@ -1,23 +1,63 @@
 <!-- Content start -->
-<form th:action="@{~/ruang/update}" method="post" xmlns:th="http://www.thymeleaf.org">
-    <input type="hidden" name="id" th:value="${data.id}">
+<form th:action="@{~/kelas/update}" method="post" xmlns:th="http://www.thymeleaf.org">
+    <input type="hidden" name="id" id="id" th:value="${data.id}">
     <h5 class="card-title mb-3">Kode</h5>
-    <input type="text" class="form-control mb-3" name="code" id="code" th:value="${data.code}">
+    <input type="text" class="form-control mb-3" name="kode" th:value="${data.kode}" placeholder="Kode" />
 
-    <h5 class="card-title mb-3">Nama</h5>
-    <input type="text" class="form-control mb-3" name="name" id="name" th:value="${data.name}">
-
-    <h5 class="card-title mb-3">Lantai ke</h5>
-    <input type="number" class="form-control mb-3" name="lantaiKe" id="lantaiKe"
-           th:value="${data.lantaiKe}">
-
-    <h5 class="card-title mb-3">Gedung</h5>
-    <select class="form-select mb-3" name="gedung.id">
+    <h5 class="card-title mb-3">Hari</h5>
+    <select class="form-select mb-3" name="namaHari">
         <option value=""></option>
-        <option th:each="gedung : ${gedungList}" th:value="${gedung.id}"
-                th:text="${gedung.name}" th:selected="${gedung.id==data.gedungId}">
-        </option>
+        <option th:each="hari : ${hariList}" th:value="${hari}" th:text="${hari}"
+            th:selected="${hari} == ${data.namaHari}"></option>
     </select>
 
-    <button type="submit" class="btn btn-success">Update</button>
+    <h5 class="card-title mb-3">Jam Mulai</h5>
+    <input type="time" class="form-control mb-3" name="jamMulai" th:value="${{data.jamMulai}}" />
+
+    <h5 class="card-title mb-3">Jam Selesai</h5>
+    <input type="time" class="form-control mb-3" name="jamSelesai" th:value="${{data.jamSelesai}}" />
+
+    <h5 class="card-title mb-3">Ruang</h5>
+    <select class="form-select mb-3" name="ruang.id">
+        <option value=""></option>
+        <option th:each="ruang : ${ruangList}" th:value="${ruang.id}" th:text="${ruang.name}"
+            th:selected="${ruang.id} == ${data.ruangId}"></option>
+    </select>
+
+    <h5 class="card-title mb-3">Matakuliah</h5>
+    <select class="form-select mb-3" name="mataKuliah.id">
+        <option value=""></option>
+        <option th:each="mataKuliah : ${mataKuliahList}" th:value="${mataKuliah.id}" th:text="${mataKuliah.name}"
+            th:selected="${mataKuliah.id} == ${data.mataKuliahId}"></option>
+    </select>
+
+    <h5 class="card-title mb-3">Dosen</h5>
+    <select class="form-select mb-3" name="dosen.id">
+        <option value=""></option>
+        <option th:each="dosen : ${dosenList}" th:value="${dosen.id}" th:text="${dosen.name}"
+            th:selected="${dosen.id} == ${data.dosenId}"></option>
+    </select>
+
+    <h5 class="card-title mb-3">Status</h5>
+    <input type="text" class="form-control mb-3" name="status" placeholder="Status" th:value="${data.status}" />
+
+    <h5 class="card-title mb-3">Tahun Ajaran</h5>
+    <input type="number" class="form-control mb-3" name="tahunAjaran" th:value="${data.tahunAjaran}" min="2000"
+        max="2100" placeholder="YYYY" />
+
+    <h5 class="card-title mb-3">Semester</h5>
+    <input type="text" class="form-control mb-3" name="semester" th:value="${data.semester}" placeholder="Semester" />
+
+    <h5 class="card-title mb-3">Quota</h5>
+    <input type="number" class="form-control mb-3" name="quota" th:value="${data.quota}" placeholder="Quota" />
+
+
+    <h5 class="card-title mb-3">Online</h5>
+    <select class="form-select mb-3" name="bisaOnline">
+        <option value=""></option>
+        <option value="1" th:selected="${data.bisaOnline} == true">Ya</option>
+        <option value="0" th:selected="${data.bisaOnline} == false">Tidak</option>
+    </select>
+
+    <button type="submit" class="btn btn-success">Save</button>
 </form>
