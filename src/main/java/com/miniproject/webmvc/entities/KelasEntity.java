@@ -18,6 +18,7 @@ import javax.persistence.TemporalType;
 import org.springframework.beans.BeanUtils;
 
 import com.miniproject.webmvc.models.KelasModel;
+import com.miniproject.webmvc.utils.DateUtil;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -98,6 +99,18 @@ public class KelasEntity {
 
     public KelasEntity(String id) {
         this.id = id;
+    }
+
+    public KelasEntity(String kode, String namaHari, String jamMulai, String jamSelesai, String ruangId,
+            String mataKuliahId, String dosenId, Boolean bisaOnline) {
+        this.kode = kode;
+        this.namaHari = namaHari;
+        this.jamMulai = DateUtil.getTime(jamMulai);
+        this.jamSelesai = DateUtil.getTime(jamSelesai);
+        this.ruangId = ruangId;
+        this.mataKuliahId = mataKuliahId;
+        this.dosenId = dosenId;
+        this.bisaOnline = bisaOnline;
     }
 
     public KelasEntity(KelasModel model) {

@@ -30,7 +30,7 @@ public class KelasModel {
     private Integer tahunAjaran;
     private String semester;
     private Integer quota;
-    private boolean bisaOnline;
+    private Boolean bisaOnline;
 
     public KelasModel() {
     }
@@ -38,18 +38,18 @@ public class KelasModel {
     public KelasModel(KelasEntity entity) {
         BeanUtils.copyProperties(entity, this);
         if (entity.getRuang() != null) {
-        ruangId = entity.getRuangId();
-        ruang = new RuangModel(entity.getRuang());
+            ruangId = entity.getRuangId();
+            ruang = new RuangModel(entity.getRuang());
         }
 
         if (entity.getMataKuliah() != null) {
-        mataKuliahId = entity.getMataKuliahId();
-        mataKuliah = new MataKuliahModel(entity.getMataKuliah());
+            mataKuliahId = entity.getMataKuliahId();
+            mataKuliah = new MataKuliahModel(entity.getMataKuliah());
         }
 
         if (entity.getDosen() != null) {
-        dosenId = entity.getDosenId();
-        dosen = new DosenModel(entity.getDosen());
+            dosenId = entity.getDosenId();
+            dosen = new DosenModel(entity.getDosen());
         }
 
     }
